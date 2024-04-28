@@ -13,7 +13,7 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 @ExtendWith(MockitoExtension.class)
-public class FindOrderByIdImplTest {
+class FindOrderByIdImplTest {
 
     @Mock
     private OrderGateway orderGateway;
@@ -22,7 +22,7 @@ public class FindOrderByIdImplTest {
     private FindOrderByIdImpl findOrderById;
 
     @Test
-    public void testFindOrderById() {
+    void testFindOrderById() {
         String orderId = "uniqueId123";
         Order expectedOrder = new Order(); // Substitua pela construção real do seu objeto Order.
         when(orderGateway.findById(orderId)).thenReturn(expectedOrder);

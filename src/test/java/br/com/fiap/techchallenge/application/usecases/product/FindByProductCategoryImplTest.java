@@ -17,7 +17,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @ExtendWith(MockitoExtension.class)
-public class FindByProductCategoryImplTest {
+class FindByProductCategoryImplTest {
 
     @Mock
     private ProductGateway productGateway;
@@ -26,7 +26,7 @@ public class FindByProductCategoryImplTest {
     private FindByProductCategoryImpl findByProductCategory;
 
     @Test
-    public void testFindByCategory() {
+    void testFindByCategory() {
         String category = "Electronics";
         List<Product> expectedProducts = new ArrayList<>();
         expectedProducts.add(Product.builder()

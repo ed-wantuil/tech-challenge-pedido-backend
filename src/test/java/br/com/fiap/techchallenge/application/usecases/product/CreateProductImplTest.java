@@ -14,7 +14,7 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 @ExtendWith(MockitoExtension.class)
-public class CreateProductImplTest {
+class CreateProductImplTest {
 
     @Mock
     private ProductGateway productGateway;
@@ -23,7 +23,7 @@ public class CreateProductImplTest {
     private CreateProductImpl createProduct;
 
     @Test
-    public void testCreateProduct() {
+    void testCreateProduct() {
         Product mockProduct = Product.builder()
                 .name(ProductName.builder()
                         .name("produto1")

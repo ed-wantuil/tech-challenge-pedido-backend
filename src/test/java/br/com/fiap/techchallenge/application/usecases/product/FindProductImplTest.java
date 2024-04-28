@@ -20,7 +20,7 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 @ExtendWith(MockitoExtension.class)
-public class FindProductImplTest {
+class FindProductImplTest {
 
     @Mock
     private ProductGateway productGateway;
@@ -29,7 +29,7 @@ public class FindProductImplTest {
     private FindProductImpl findProduct;
 
     @Test
-    public void testFind() {
+    void testFind() {
         Product product1 = Product.builder()
                 .name(ProductName.builder()
                         .name("produto1")
