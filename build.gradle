@@ -71,3 +71,7 @@ sonarqube {
         property "sonar.exclusions", ["**/src/test/**, **/src/integrationTest/**"]
     }
 }
+
+jacoco {
+    toolVersion = "0.8.7"
+}
