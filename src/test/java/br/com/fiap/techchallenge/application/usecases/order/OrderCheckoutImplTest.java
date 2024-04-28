@@ -13,7 +13,7 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 @ExtendWith(MockitoExtension.class)
-public class OrderCheckoutImplTest {
+class OrderCheckoutImplTest {
 
     @Mock
     private OrderGateway orderGateway;
@@ -22,7 +22,7 @@ public class OrderCheckoutImplTest {
     private OrderCheckoutImpl orderCheckout;
 
     @Test
-    public void testCheckout() {
+    void testCheckout() {
         Order mockOrder = new Order(); // Assuma a existência de uma implementação adequada de Order.
         when(orderGateway.checkout(mockOrder)).thenReturn(mockOrder);
 

@@ -12,7 +12,7 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 @ExtendWith(MockitoExtension.class)
-public class RemoveProductImplTest {
+class RemoveProductImplTest {
 
     @Mock
     private ProductGateway productGateway;
@@ -21,7 +21,7 @@ public class RemoveProductImplTest {
     private RemoveProductImpl removeProduct;
 
     @Test
-    public void testRemove() {
+    void testRemove() {
         String productId = "123";
 
         removeProduct.remove(productId);

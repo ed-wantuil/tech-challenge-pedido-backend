@@ -14,7 +14,7 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 @ExtendWith(MockitoExtension.class)
-public class FindCustomerByCpfImplTest {
+class FindCustomerByCpfImplTest {
 
     @Mock
     private CustomerGateway customerGateway;
@@ -23,7 +23,7 @@ public class FindCustomerByCpfImplTest {
     private FindCustomerByCpfImpl findCustomerByCpfImpl;
 
     @Test
-    public void testFindByCpf() {
+    void testFindByCpf() {
         String cpf = "123.456.789-00";
         Customer expectedCustomer = new Customer(); // Suponha que este seja o objeto Customer esperado.
 

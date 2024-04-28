@@ -15,7 +15,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 
 
 @ExtendWith(MockitoExtension.class)
-public class CreateCustomerImplTest {
+class CreateCustomerImplTest {
 
     @Mock
     private CustomerGateway customerGateway;
@@ -24,7 +24,7 @@ public class CreateCustomerImplTest {
     private CreateCustomerImpl createCustomerImpl;
 
     @Test
-    public void testCreateCustomer() {
+    void testCreateCustomer() {
         Customer dummyCustomer = new Customer(); // Substitua isso pela implementação real do seu objeto Customer.
         when(customerGateway.create(dummyCustomer)).thenReturn(dummyCustomer);
 

@@ -26,12 +26,6 @@ public class CreateCustomerControllerImpl implements CreateCustomerController {
 
         customer = customerCreate.create(customer);
 
-        String teste = """
-                linha 1
-                linha
-                                """;
-
-
         return customerToCustomerResponse.convert(customer);
     }
 
