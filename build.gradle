@@ -59,7 +59,7 @@ jacocoTestReport {
     }
 }
 
-sonarqube {
+sonar {
     properties {
         property "sonar.projectKey", System.getenv("SONAR_PROJECT_KEY")
         property "sonar.organization", System.getenv("SONAR_ORG")
