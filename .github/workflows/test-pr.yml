@@ -34,7 +34,7 @@ jobs:
         run: ./gradlew integrationTest
 
       - name: SonarQube Scan
-        uses: SonarSource/sonarqube-scan-action@master
+        run: ./gradlew sonarqube
         env:
           SONAR_PROJECT_KEY: ${{ secrets.SONAR_PROJECT_KEY }}
           SONAR_ORG: ${{ secrets.SONAR_ORG }}
