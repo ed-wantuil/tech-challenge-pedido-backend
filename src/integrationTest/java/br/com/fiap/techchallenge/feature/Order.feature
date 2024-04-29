@@ -10,3 +10,7 @@ Feature: Tests Api Customer
     And header Content-Type = 'application/json'
     When method POST
     Then status 200
+
+#  TODO  Checkout withou customer
+
+# TODO Get by id

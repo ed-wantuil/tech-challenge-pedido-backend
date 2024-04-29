@@ -10,3 +10,11 @@ Feature: Tests Api Customer
     And header Content-Type = 'application/json'
     When method POST
     Then status 200
+
+# TODO atualizar produto
+
+#  TODO  Get list produt
+
+#  TODO Get find by category
+
+# TODO remove product

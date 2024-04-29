@@ -12,5 +12,6 @@ public class OrderCheckoutImpl implements OrderCheckout {
     @Override
     public Order checkout(final Order order) {
         return orderGateway.checkout(order);
+//        TODO send sns
     }
 }

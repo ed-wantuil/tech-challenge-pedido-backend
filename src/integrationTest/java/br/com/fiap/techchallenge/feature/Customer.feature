@@ -10,3 +10,5 @@ Scenario: Testando a criacao de um cliente
   And header Content-Type = 'application/json'
   When method POST
   Then status 200
+
+#  TODO FIND BY CPF
