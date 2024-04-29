@@ -55,8 +55,12 @@ jobs:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
 
       - name: Quality Gate Check
-        uses: SonarSource/sonarqube-quality-gate-action@master
+        id: quality_gate
+        run: |
+          wget -q --wait=5 --tries=10 --retry-connrefused -O- "https://sonarcloud.io/api/qualitygates/project_status?projectKey=${{ secrets.SONAR_PROJECT_KEY }}" | jq -r '.projectStatus.status'
         env:
-          SONAR_PROJECT_KEY: ${{ secrets.SONAR_PROJECT_KEY }}
-          SONAR_ORG: ${{ secrets.SONAR_ORG }}
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+
+      - name: Fail if Quality Gate failed
+        if: steps.quality_gate.outputs.result != 'OK'
+        run: exit 1
