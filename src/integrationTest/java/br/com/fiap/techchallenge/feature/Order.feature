@@ -18,7 +18,6 @@ Feature: Tests Api Customer
     When method POST
     Then status 200
 
-
   Scenario: Testando a busca de um pedido pelo id
     And path "order/find-by-id"
     And param id = "9ee53a51-0d52-47a7-9d2d-8d7f17be8415"
