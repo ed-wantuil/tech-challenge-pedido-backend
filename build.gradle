@@ -67,8 +67,9 @@ sonar {
         property "sonar.host.url", "https://sonarcloud.io"
         property "sonar.token", System.getenv("SONAR_TOKEN")
         property "sonar.coverage.jacoco.xmlReportPaths", "${buildDir}/reports/jacoco/test/jacocoTestReport.xml"
-        property "sonar.test.exclusions", ["**/src/test/**", "**/src/integrationTest/**", "**/src/**/frameworks/**"]
         property "sonar.coverage.exclusions", ["**/src/test/**, **/src/integrationTest/**", "**/src/**/frameworks/**", "**/src/**/interfaces/**", "**/src/**/domain/**", "**/src/**/Application.java"]
-        property "sonar.exclusions", ["**/src/test/**, **/src/integrationTest/**"]
+        property "sonar.pullrequest.key", System.getenv("PULL_REQUEST_KEY")
+        property "sonar.pullrequest.branch", System.getenv("BRANCH_NAME")
+        property "sonar.pullrequest.base", System.getenv("TARGET_BRANCH")
     }
 }

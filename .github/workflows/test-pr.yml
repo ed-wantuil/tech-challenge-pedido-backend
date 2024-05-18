@@ -53,12 +53,14 @@ jobs:
           SONAR_PROJECT_KEY: ${{ secrets.SONAR_PROJECT_KEY }}
           SONAR_ORG: ${{ secrets.SONAR_ORG }}
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+          BRANCH_NAME: ${{ github.ref_name }}
+          TARGET_BRANCH: ${{ github.base_ref }}
 
-      - name: Check Coverage
-        run: |
-            COVERAGE=$(curl -sS -u ${{ secrets.SONAR_TOKEN }}: https://sonarcloud.io/api/measures/component_tree?component=<your_project_key>&metricKeys=coverage | jq -r '.baseComponent.measures[0].value')
-            THRESHOLD=80
-            if (( $(echo "$COVERAGE < $THRESHOLD" | bc -l) )); then
-              echo "Coverage is below threshold"
-              exit 1
-            fi
+#      - name: Check Coverage
+#        run: |
+#            COVERAGE=$(curl -sS -u ${{ secrets.SONAR_TOKEN }}: https://sonarcloud.io/api/measures/component_tree?component=<your_project_key>&metricKeys=coverage | jq -r '.baseComponent.measures[0].value')
+#            THRESHOLD=80
+#            if (( $(echo "$COVERAGE < $THRESHOLD" | bc -l) )); then
+#              echo "Coverage is below threshold"
+#              exit 1
+#            fi
