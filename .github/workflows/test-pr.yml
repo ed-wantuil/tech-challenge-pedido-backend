@@ -55,12 +55,18 @@ jobs:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
           BRANCH_NAME: ${{ github.ref_name }}
           TARGET_BRANCH: ${{ github.base_ref }}
+          PULL_REQUEST_KEY: ${{ github.event.pull_request.number }}
 
-#      - name: Check Coverage
-#        run: |
-#            COVERAGE=$(curl -sS -u ${{ secrets.SONAR_TOKEN }}: https://sonarcloud.io/api/measures/component_tree?component=<your_project_key>&metricKeys=coverage | jq -r '.baseComponent.measures[0].value')
-#            THRESHOLD=80
-#            if (( $(echo "$COVERAGE < $THRESHOLD" | bc -l) )); then
-#              echo "Coverage is below threshold"
-#              exit 1
-#            fi
+      - name: Run SonarQube analysis on push
+        if: github.event_name == 'push'
+        env:
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+          BRANCH_NAME: ${{ github.ref_name }}
+        run: ./gradlew sonarqube -Dsonar.branch.name=${{ github.ref_name }}
+
+      - name: Upload coverage report
+        if: always()
+        uses: actions/upload-artifact@v2
+        with:
+          name: jacoco-report
+          path: build/reports/jacoco/test/jacocoTestReport.xml
