@@ -47,9 +47,6 @@ jobs:
       - name: Run integration tests
         run: ./gradlew integrationTest
 
-      - name: Generate Coverage Report
-        run: ./gradlew jacoco:report
-
       - name: SonarQube Scan
         run: ./gradlew sonar
         env:
