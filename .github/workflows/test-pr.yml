@@ -48,32 +48,20 @@ jobs:
         run: ./gradlew integrationTest
 
       - name: Generate Coverage Report
-        run: mvn jacoco:report
+        run: ./gradlew jacoco:report
+
+      - name: SonarQube Scan
+        run: ./gradlew sonar
+        env:
+          SONAR_PROJECT_KEY: ${{ secrets.SONAR_PROJECT_KEY }}
+          SONAR_ORG: ${{ secrets.SONAR_ORG }}
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
 
       - name: Check Coverage
         run: |
-          COVERAGE=$(mvn jacoco:report | grep -A 1 '<counter type="INSTRUCTION" missed="0" covered="' | grep 'covered' | sed -n 's/.*covered="\([0-9]*\)".*/\1/p')
-          THRESHOLD=80
-          if [ "$COVERAGE" -lt "$THRESHOLD" ]; then
-            echo "Coverage is below threshold"
-            exit 1
-          fi
-
-
-#      - name: SonarQube Scan
-#        run: ./gradlew sonar
-#        env:
-#          SONAR_PROJECT_KEY: ${{ secrets.SONAR_PROJECT_KEY }}
-#          SONAR_ORG: ${{ secrets.SONAR_ORG }}
-#          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-#
-#      - name: Quality Gate Check
-#        id: quality_gate
-#        run: |
-#          wget -q --wait=5 --tries=10 --retry-connrefused -O- "https://sonarcloud.io/api/qualitygates/project_status?projectKey=${{ secrets.SONAR_PROJECT_KEY }}" | jq -r '.projectStatus.status'
-#        env:
-#          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-#
-#      - name: Fail if Quality Gate failed
-#        if: steps.quality_gate.outputs.result != 'OK'
-#        run: exit 1
+            COVERAGE=$(curl -sS -u ${{ secrets.SONAR_TOKEN }}: https://sonarcloud.io/api/measures/component_tree?component=<your_project_key>&metricKeys=coverage | jq -r '.baseComponent.measures[0].value')
+            THRESHOLD=80
+            if (( $(echo "$COVERAGE < $THRESHOLD" | bc -l) )); then
+              echo "Coverage is below threshold"
+              exit 1
+            fi
