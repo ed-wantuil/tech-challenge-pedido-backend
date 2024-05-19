@@ -67,9 +67,9 @@ jacocoTestReport {
         classDirectories.setFrom(files(classDirectories.files.collect {
             fileTree(dir: it, exclude: [
                     'br/com/fiap/techchallenge/domain/**',
-                    'br/com/fiap/techchallenge/frameworks/**',
-                    'br/com/fiap/techchallenge/interfaces/**',
-                    'br/com/fiap/techchallenge/Aplplication.class'
+//                    'br/com/fiap/techchallenge/frameworks/**',
+//                    'br/com/fiap/techchallenge/interfaces/**',
+//                    'br/com/fiap/techchallenge/Aplplication.class'
             ])
         }))
     }
