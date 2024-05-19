@@ -47,12 +47,19 @@ jobs:
       - name: Run integration tests
         run: ./gradlew integrationTest
 
+      - name: Upload JaCoCo Report
+        uses: actions/upload-artifact@v4.3.1
+        with:
+          name: code-coverage-report
+          path: |
+            ${{ github.workspace }}/**/build/reports/jacoco/test/jacocoTestReport.xml
+
       - name: Add coverage to PR
         id: jacoco
         uses: madrapps/jacoco-report@v1.6.1
         with:
           paths: |
-            ${{ github.workspace }}/build/reports/jacoco/test/jacocoTestReport.xml
+            ${{ github.workspace }}/**/build/reports/jacoco/test/jacocoTestReport.xml
           token: ${{ secrets.GITHUB_TOKEN }}
           min-coverage-overall: 80
           min-coverage-changed-files: 80
