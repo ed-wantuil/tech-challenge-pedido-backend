@@ -1,6 +1,6 @@
 plugins {
     id 'java'
-    id 'org.springframework.boot' version '3.1.1'
+    id 'org.springframework.boot' version '3.2.5'
     id 'io.spring.dependency-management' version '1.1.0'
     id 'org.sonarqube' version '5.0.0.4638'
     id 'org.flywaydb.flyway' version '9.22.3'
@@ -27,10 +27,17 @@ dependencies {
     implementation 'org.springdoc:springdoc-openapi-starter-webmvc-ui:2.1.0'
 
     testImplementation platform('org.junit:junit-bom:5.9.1')
-    testImplementation 'org.junit.jupiter:junit-jupiter'
     testImplementation 'org.mockito:mockito-junit-jupiter:4.2.0'
 
+    testImplementation 'org.junit.jupiter:junit-jupiter:5.9.2'
+    implementation 'org.junit.jupiter:junit-jupiter:5.9.2'
+    testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+
+
     implementation 'org.postgresql:postgresql'
+
+    implementation 'com.google.guava:guava:31.1-jre'
+
 }
 
 test {
@@ -55,7 +62,6 @@ flyway {
 jacocoTestReport {
     reports {
         xml.required = true
-//        xml.outputLocation = file("${rootDir}/build/reports/jacoco/test/jacocoTestReport.xml")
     }
 }
 
@@ -65,19 +71,13 @@ sonar {
         property "sonar.organization", System.getenv("SONAR_ORG")
         property "sonar.host.url", "https://sonarcloud.io"
         property "sonar.token", System.getenv("SONAR_TOKEN")
-//        property "sonar.java.coveragePlugin", "jacoco"
-//
-//        property "sonar.sourceEncoding", "UTF-8"
-//        property "sonar.java.source", "17"
-//        property "sonar.scm.disabled", true
-//        property "sonar.issuesReport.console.enable", true
-//
-//        property "sonar.coverage.jacoco.xmlReportPaths", "${rootDir}/build/reports/jacoco/test/jacocoTestReport.xml"
-//        property "sonar.pullrequest.key", System.getenv("PULL_REQUEST_KEY")
-//        property "sonar.pullrequest.branch", System.getenv("BRANCH_NAME")
-//        property "sonar.pullrequest.base", System.getenv("TARGET_BRANCH")
-//        property "sonar.java.test.binaries", "${rootDir}/build/classes/java/test"
-//        properties.remove("sonar.jacoco.reportPath")
-//        properties.remove("sonar.jacoco.reportPaths")
+
+        property "sonar.pullrequest.key", System.getenv("PULL_REQUEST_KEY")
+        property "sonar.pullrequest.branch", System.getenv("BRANCH_NAME")
+        property "sonar.pullrequest.base", System.getenv("TARGET_BRANCH")
+
+        property("sonar.sources", "src/main/java")
+        property "sonar.tests", "src/test/java"
+        property "sonar.projectVersion", "12"
     }
 }
