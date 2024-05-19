@@ -59,6 +59,12 @@ jobs:
           path: |
             ${{ github.workspace }}/**/build/reports/jacoco/test/jacocoTestReport.xml
 
+      - name: Upload JaCoCo HTML Report
+        uses: actions/upload-artifact@v4.3.1
+        with:
+          name: jacoco-html-report
+          path: ${{ github.workspace }}/**/build/reports/jacoco/test/html/*
+
       - name: Add coverage to PR
         id: jacoco
         uses: madrapps/jacoco-report@v1.6.1
