@@ -78,7 +78,7 @@ jobs:
       - name: Check coverage
         id: coverage
         run: |
-          COVERAGE=$(grep -oP '(?<=<coverage>\s)\d+' ${{ github.workspace }}/**/build/reports/jacoco/test/jacocoTestReport.xml)
+          COVERAGE=$(grep -oP '(?<=<coverage>\s)\d+' ${{ github.workspace }}/build/reports/jacoco/test/jacocoTestReport.xml)
           if [ $COVERAGE -lt 80 ]; then
             echo "Coverage ($COVERAGE%) is below the threshold of 80%"
             exit 1
