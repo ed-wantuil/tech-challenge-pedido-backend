@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
         - name: tech-challenge2
-          image: 058264138215.dkr.ecr.us-east-1.amazonaws.com/techchallenge:latest
+          image: 058264138215.dkr.ecr.us-east-1.amazonaws.com/techchallenge-pedido:latest
           imagePullPolicy: Always
           resources:
             limits:
