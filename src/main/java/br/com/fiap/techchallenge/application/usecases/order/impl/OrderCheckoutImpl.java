@@ -7,11 +7,18 @@ import lombok.AllArgsConstructor;
 
 @AllArgsConstructor
 public class OrderCheckoutImpl implements OrderCheckout {
+
     private final OrderGateway orderGateway;
+
+    private final RegisterPayment registerPayment;
 
     @Override
     public Order checkout(final Order order) {
-        return orderGateway.checkout(order);
-//        TODO send sns
+        final Order orderNew = orderGateway.checkout(order);
+
+        registerPayment.register(orderNew);
+
+        return orderNew;
+
     }
 }

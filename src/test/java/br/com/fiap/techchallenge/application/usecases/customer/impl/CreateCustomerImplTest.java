@@ -25,12 +25,12 @@ class CreateCustomerImplTest {
 
     @Test
     void testCreateCustomer() {
-        Customer dummyCustomer = new Customer(); // Substitua isso pela implementação real do seu objeto Customer.
+        final Customer dummyCustomer = new Customer(); // Substitua isso pela implementação real do seu objeto Customer.
         when(customerGateway.create(dummyCustomer)).thenReturn(dummyCustomer);
 
         // Ação
-        Customer createdCustomer = createCustomerImpl.create(dummyCustomer);
+        final Customer createdCustomer = createCustomerImpl.create(dummyCustomer);
         verify(customerGateway, times(1)).create(dummyCustomer);
-//        assertEquals(dummyCustomer, createdCustomer);
+        assertEquals(dummyCustomer, createdCustomer);
     }
 }

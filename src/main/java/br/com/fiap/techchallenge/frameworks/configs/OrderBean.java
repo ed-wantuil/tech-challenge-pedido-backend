@@ -27,8 +27,8 @@ import org.springframework.context.annotation.Configuration;
 public class OrderBean {
 
     @Bean
-    OrderCheckout orderCheckout(final OrderGateway orderRepository) {
-        return new OrderCheckoutImpl(orderRepository);
+    OrderCheckout orderCheckout(final OrderGateway orderRepository, final RegisterPayment registerPayment) {
+        return new OrderCheckoutImpl(orderRepository, registerPayment);
     }
 
     @Bean
@@ -37,7 +37,7 @@ public class OrderBean {
     }
 
     @Bean
-    RegisterPayment registerDelivery(final OrderQueueGateway orderQueueGateway) {
+    RegisterPayment registerPayment(final OrderQueueGateway orderQueueGateway) {
         return new RegisterPaymentImpl(orderQueueGateway);
     }
 
