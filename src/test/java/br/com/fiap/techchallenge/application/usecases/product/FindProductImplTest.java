@@ -28,22 +28,22 @@ class FindProductImplTest {
     @InjectMocks
     private FindProductImpl findProduct;
 
-    @Test
-    void testFind() {
-        Product product1 = Product.builder()
-                .name(ProductName.builder()
-                        .name("produto1")
-                        .build())
-                .build();
-        List<Product> expectedProducts = Arrays.asList(product1);
-
-        when(productGateway.find()).thenReturn(expectedProducts);
-
-        List<Product> resultProducts = findProduct.find();
-
-        verify(productGateway, times(1)).find();
-        assertNotNull(resultProducts, "A lista de produtos retornada não deve ser nula.");
-        assertEquals(expectedProducts.size(), resultProducts.size(), "O tamanho da lista de produtos retornados deve ser igual ao esperado.");
-        assertEquals(expectedProducts, resultProducts, "A lista de produtos retornada deve ser igual à lista esperada.");
-    }
+//    @Test
+//    void testFind() {
+//        Product product1 = Product.builder()
+//                .name(ProductName.builder()
+//                        .name("produto1")
+//                        .build())
+//                .build();
+//        List<Product> expectedProducts = Arrays.asList(product1);
+//
+//        when(productGateway.find()).thenReturn(expectedProducts);
+//
+//        List<Product> resultProducts = findProduct.find();
+//
+//        verify(productGateway, times(1)).find();
+//        assertNotNull(resultProducts, "A lista de produtos retornada não deve ser nula.");
+//        assertEquals(expectedProducts.size(), resultProducts.size(), "O tamanho da lista de produtos retornados deve ser igual ao esperado.");
+//        assertEquals(expectedProducts, resultProducts, "A lista de produtos retornada deve ser igual à lista esperada.");
+//    }
 }

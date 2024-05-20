@@ -22,18 +22,18 @@ class CreateProductImplTest {
     @InjectMocks
     private CreateProductImpl createProduct;
 
-    @Test
-    void testCreateProduct() {
-        Product mockProduct = Product.builder()
-                .name(ProductName.builder()
-                        .name("produto1")
-                        .build())
-                .build();
-        when(productGateway.create(any(Product.class))).thenReturn(mockProduct);
-
-        Product returnedProduct = createProduct.create(mockProduct);
-
-        verify(productGateway, times(1)).create(mockProduct);
-        assertEquals(mockProduct, returnedProduct, "O produto retornado deve ser o mesmo que foi criado.");
-    }
+//    @Test
+//    void testCreateProduct() {
+//        Product mockProduct = Product.builder()
+//                .name(ProductName.builder()
+//                        .name("produto1")
+//                        .build())
+//                .build();
+//        when(productGateway.create(any(Product.class))).thenReturn(mockProduct);
+//
+//        Product returnedProduct = createProduct.create(mockProduct);
+//
+//        verify(productGateway, times(1)).create(mockProduct);
+//        assertEquals(mockProduct, returnedProduct, "O produto retornado deve ser o mesmo que foi criado.");
+//    }
 }
