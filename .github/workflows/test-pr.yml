@@ -7,6 +7,11 @@ on:
       - release
       - develop
 
+permissions:
+  contents: read
+  pull-requests: write
+
+
 jobs:
   test:
     runs-on: ubuntu-latest
@@ -24,6 +29,20 @@ jobs:
       - name: Grant execute permission for gradlew
         run: chmod +x gradlew
 
+      - name: Cache SonarCloud packages
+        uses: actions/cache@v3
+        with:
+          path: ~/.sonar/cache
+          key: ${{ runner.os }}-sonar
+          restore-keys: ${{ runner.os }}-sonar
+
+      - name: Cache Gradle packages
+        uses: actions/cache@v3
+        with:
+          path: ~/.gradle/caches
+          key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle') }}
+          restore-keys: ${{ runner.os }}-gradle
+
       - name: Build with Gradle
         run: ./gradlew build -x test -x integrationTest
 
@@ -33,12 +52,32 @@ jobs:
       - name: Run integration tests
         run: ./gradlew integrationTest
 
-      - name: SonarQube Scan
-        run: ./gradlew sonar
-        env:
-          SONAR_PROJECT_KEY: ${{ secrets.SONAR_PROJECT_KEY }}
-          SONAR_ORG: ${{ secrets.SONAR_ORG }}
-          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+      - name: Upload JaCoCo Report
+        uses: actions/upload-artifact@v4.3.1
+        with:
+          name: code-coverage-report
+          path: |
+            ${{ github.workspace }}/**/build/reports/jacoco/test/jacocoTestReport.xml
 
-      - name: Quality Gate Check
-        uses: SonarSource/sonarqube-quality-gate-action@master
+      - name: Upload JaCoCo HTML Report
+        uses: actions/upload-artifact@v4.3.1
+        with:
+          name: jacoco-html-report
+          path: ${{ github.workspace }}/**/build/reports/jacoco/test/html/*
+
+      - name: Add coverage to PR
+        id: jacoco
+        uses: madrapps/jacoco-report@v1.6.1
+        with:
+          paths: |
+            ${{ github.workspace }}/**/build/reports/jacoco/test/jacocoTestReport.xml
+          token: ${{ secrets.GITHUB_TOKEN }}
+          min-coverage-overall: 80
+          min-coverage-changed-files: 80
+
+      - name: Fail PR if overall coverage is less than 80%
+        if: ${{ steps.jacoco.outputs.coverage-overall < 80.0 }}
+        uses: actions/github-script@v6
+        with:
+          script: |
+            core.setFailed('Overall coverage is less than 80%!')

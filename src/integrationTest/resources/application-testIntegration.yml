@@ -4,3 +4,9 @@ spring:
     driver-class-name: org.h2.Driver
   flyway:
     enabled: false
+
+aws:
+  sqs:
+    queue:
+      payment:
+        endpoint: http://localhost:4566/000000000000/tech_challenge_pagamento

@@ -1,6 +1,6 @@
 spring:
   datasource:
-    url: jdbc:postgresql://postgres-db-instance.cjkkycwkgu89.us-east-1.rds.amazonaws.com:5432/postgres
+    url: jdbc:postgresql://postgres-db-instance.c6k558zbt29v.us-east-1.rds.amazonaws.com:5432/postgres
     username: techchallenge
     password: 2I5d3~yiPfab9hr>z
     hikari:
@@ -10,3 +10,9 @@ spring:
     database-platform: org.hibernate.dialect.PostgreSQLDialect
     hibernate:
       ddl-auto: none
+
+aws:
+  sqs:
+    queue:
+      payment:
+        endpoint:

@@ -25,6 +25,8 @@ dependencies {
     integrationTestImplementation 'org.junit.jupiter:junit-jupiter-params:5.7.2'
     integrationTestImplementation 'com.intuit.karate:karate-junit5:1.4.1'
     integrationTestRuntimeOnly "com.h2database:h2"
+    integrationTestImplementation 'org.testcontainers:localstack'
+    integrationTestImplementation 'org.testcontainers:junit-jupiter'
 }
 
 
