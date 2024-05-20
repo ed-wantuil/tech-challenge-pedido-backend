@@ -1,10 +1,13 @@
 package br.com.fiap.techchallenge.frameworks.configs;
 
 import br.com.fiap.techchallenge.application.gateways.OrderGateway;
+import br.com.fiap.techchallenge.application.gateways.OrderQueueGateway;
 import br.com.fiap.techchallenge.application.usecases.order.FindOrderById;
 import br.com.fiap.techchallenge.application.usecases.order.OrderCheckout;
 import br.com.fiap.techchallenge.application.usecases.order.impl.FindOrderByIdImpl;
 import br.com.fiap.techchallenge.application.usecases.order.impl.OrderCheckoutImpl;
+import br.com.fiap.techchallenge.application.usecases.order.impl.RegisterPayment;
+import br.com.fiap.techchallenge.application.usecases.order.impl.RegisterPaymentImpl;
 import br.com.fiap.techchallenge.frameworks.web.order.FindOrderByIdWeb;
 import br.com.fiap.techchallenge.frameworks.web.order.OrderCheckoutWeb;
 import br.com.fiap.techchallenge.frameworks.web.order.impl.FindOrderByIdWebImpl;
@@ -31,6 +34,11 @@ public class OrderBean {
     @Bean
     OrderRequestToOrder orderRequestToOrder(final CustomerRequestToCustomer customerRequestToCustomer) {
         return new OrderRequestToOrder(customerRequestToCustomer);
+    }
+
+    @Bean
+    RegisterPayment registerDelivery(final OrderQueueGateway orderQueueGateway) {
+        return new RegisterPaymentImpl(orderQueueGateway);
     }
 
     @Bean
