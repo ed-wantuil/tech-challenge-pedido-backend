@@ -28,7 +28,7 @@ spec:
             - name: SERVER_PORT
               value: '8080'
             - name: SPRING_DATASOURCE_URL
-              value: jdbc:postgresql://postgres-db-instance.cjkkycwkgu89.us-east-1.rds.amazonaws.com:5432/postgres
+              value: jdbc:postgresql://postgres-db-instance.c6k558zbt29v.us-east-1.rds.amazonaws.com:5432/postgres
           ports:
             - name: http-port
               containerPort: 8080
